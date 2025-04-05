@@ -5,6 +5,7 @@ const userApp = require("./APIs/userApp");
 const jobsApp = require("./APIs/jobsApp");
 const modalApp = require("./APIs/modalApp");
 const requestsApp = require("./APIs/requestsApp");
+const razorApp = require("./APIs/RazorPay.js");
 const app = exp();
 
 app.use(exp.json());
@@ -33,6 +34,7 @@ app.use("/user", userApp);
 app.use("/jobs", jobsApp);
 app.use("/modal", modalApp);
 app.use("/requests", requestsApp);
+app.use("/razorpay", razorApp);
 
 app.listen(port, () => {
   console.log(`Running on port: ${port}.`);

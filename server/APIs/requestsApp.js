@@ -1,8 +1,6 @@
 const exp = require("express");
 require("dotenv").config();
-const jwt = require("jsonwebtoken");
 const expHandler = require("express-async-handler");
-const bcrypt = require("bcryptjs");
 const requestsApp = exp.Router();
 const { verifyToken } = require("../Middleware/authentication");
 
