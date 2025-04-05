@@ -50,7 +50,7 @@ function Navbar({ toggleSidebar }) {
             </button>
             <div className="flex-shrink-0">
               <Link to="/" className="text-white font-bold text-xl ml-2">
-                Pill-Planner
+                FREELANCER-HUB
               </Link>
             </div>
           </div>
