@@ -82,7 +82,7 @@ Only return an array of matching job objects.
 
     nav("/");
 
-    alert("Succesfully requested");
+    alert("Succesfully requested!");
   };
 
   return (
