@@ -4,3 +4,4 @@ webathon/.env
 server/node_modules
 server/.env
 requests.http
+Video-Call-App-NodeJS/node_modules
