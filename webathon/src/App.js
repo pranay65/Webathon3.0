@@ -8,6 +8,7 @@ import RegisterPage from "./pages/Register";
 import UserDash from "./pages/SellerDash";
 import BuyerDash from "./pages/BuyerDash";
 import PitchBuilder from "./pages/PitchBuilder";
+import ContractPage from "./pages/ContractPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/seller" element={<UserDash/>}/>
         <Route path="/buyer" element={<BuyerDash/>}/>
         <Route path="/pitch" element={<PitchBuilder />} />
+        <Route path="/contract" element={<ContractPage />}/>
       </Routes>
     </Router>
   );
