@@ -19,13 +19,10 @@ function Navbar({ toggleSidebar }) {
   const handleLogout = () => {
     setIsLoggedIn(false);
     window.localStorage.removeItem("token");
-    window.localStorage.removeItem("user");
-    window.localStorage.removeItem("cart");
     navigate("/login");
-    setIsMenuOpen(false); // Closing the menu on logout
+    setIsMenuOpen(false);
   };
 
-  // Close menu if clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -37,62 +34,63 @@ function Navbar({ toggleSidebar }) {
   }, []);
 
   return (
-    <nav className="bg-gray-800 fixed w-full z-10 shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="bg-gradient-to-r from-indigo-600 to-blue-500 fixed w-full z-20 shadow-xl font-sans">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
         <div className="flex items-center justify-between h-16">
-         
           <div className="flex items-center">
             <button
               onClick={toggleSidebar}
-              className="text-gray-300 hover:text-white p-2"
+              className="text-white hover:text-gray-200 p-2 transition-colors duration-300"
             >
               <FaBars className="h-6 w-6" />
             </button>
             <div className="flex-shrink-0">
-              <Link to="/" className="text-white font-bold text-xl ml-2">
-                FREELANCER-HUB
+              <Link
+                to="/"
+                className="text-white font-extrabold text-2xl ml-3 tracking-wide"
+              >
+                Freelance Hub
               </Link>
             </div>
           </div>
 
-          
           <div className="hidden md:flex items-center">
-            <div className="ml-10 flex items-baseline space-x-4">
+            <div className="ml-10 flex items-baseline space-x-6">
               <Link
                 to="/home"
-                className="text-gray-300 hover:text-white px-3 py-2 rounded-md"
+                className="text-white hover:text-gray-200 px-3 py-2 rounded-md transition-colors duration-300"
               >
                 Home
               </Link>
               <Link
                 to="/about"
-                className="text-gray-300 hover:text-white px-3 py-2 rounded-md"
+                className="text-white hover:text-gray-200 px-3 py-2 rounded-md transition-colors duration-300"
               >
                 About
               </Link>
               <Link
                 to="/services"
-                className="text-gray-300 hover:text-white px-3 py-2 rounded-md"
+                className="text-white hover:text-gray-200 px-3 py-2 rounded-md transition-colors duration-300"
               >
                 Services
               </Link>
               <Link
                 to="/contact"
-                className="text-gray-300 hover:text-white px-3 py-2 rounded-md"
+                className="text-white hover:text-gray-200 px-3 py-2 rounded-md transition-colors duration-300"
               >
                 Contact
               </Link>
               {!isLoggedIn ? (
                 <Link
                   to="/login"
-                  className="text-gray-300 hover:text-white px-3 py-2 rounded-md"
+                  className="text-white hover:text-gray-200 px-3 py-2 rounded-md transition-colors duration-300"
                 >
                   Login
                 </Link>
               ) : (
                 <button
                   onClick={handleLogout}
-                  className="text-gray-300 hover:text-white px-3 py-2 rounded-md"
+                  className="text-white hover:text-gray-200 px-3 py-2 rounded-md transition-colors duration-300"
                 >
                   Logout
                 </button>
@@ -100,44 +98,71 @@ function Navbar({ toggleSidebar }) {
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-300 hover:text-white"
+              className="text-white hover:text-gray-200 transition-colors duration-300"
             >
-              {isMenuOpen ? <FaTimes className="h-6 w-6" /> : <FaBars className="h-6 w-6" />}
+              {isMenuOpen ? (
+                <FaTimes className="h-6 w-6" />
+              ) : (
+                <FaBars className="h-6 w-6" />
+              )}
             </button>
           </div>
         </div>
       </div>
 
- 
       <div
         ref={menuRef}
-        className={`md:hidden fixed top-16 left-0 w-full bg-gray-900 text-white transition-transform duration-300 ease-in-out ${
-          isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+        className={`md:hidden fixed top-16 left-0 w-full bg-gradient-to-b from-blue-600 to-indigo-700 text-white transition-transform duration-300 ease-in-out ${
+          isMenuOpen
+            ? "translate-y-0 opacity-100"
+            : "-translate-y-full opacity-0"
         }`}
       >
-        <div className="flex flex-col space-y-2 py-4 px-6">
-          <Link to="/home" className="hover:bg-gray-700 px-4 py-2 rounded" onClick={() => setIsMenuOpen(false)}>
+        <div className="flex flex-col space-y-3 py-5 px-6">
+          <Link
+            to="/home"
+            className="hover:bg-indigo-500 px-4 py-2 rounded transition-colors duration-300"
+            onClick={() => setIsMenuOpen(false)}
+          >
             Home
           </Link>
-          <Link to="/about" className="hover:bg-gray-700 px-4 py-2 rounded" onClick={() => setIsMenuOpen(false)}>
+          <Link
+            to="/about"
+            className="hover:bg-indigo-500 px-4 py-2 rounded transition-colors duration-300"
+            onClick={() => setIsMenuOpen(false)}
+          >
             About
           </Link>
-          <Link to="/services" className="hover:bg-gray-700 px-4 py-2 rounded" onClick={() => setIsMenuOpen(false)}>
+          <Link
+            to="/services"
+            className="hover:bg-indigo-500 px-4 py-2 rounded transition-colors duration-300"
+            onClick={() => setIsMenuOpen(false)}
+          >
             Services
           </Link>
-          <Link to="/contact" className="hover:bg-gray-700 px-4 py-2 rounded" onClick={() => setIsMenuOpen(false)}>
+          <Link
+            to="/contact"
+            className="hover:bg-indigo-500 px-4 py-2 rounded transition-colors duration-300"
+            onClick={() => setIsMenuOpen(false)}
+          >
             Contact
           </Link>
           {!isLoggedIn ? (
-            <Link to="/login" className="hover:bg-gray-700 px-4 py-2 rounded" onClick={() => setIsMenuOpen(false)}>
+            <Link
+              to="/login"
+              className="hover:bg-indigo-500 px-4 py-2 rounded transition-colors duration-300"
+              onClick={() => setIsMenuOpen(false)}
+            >
               Login
             </Link>
           ) : (
-            <button onClick={handleLogout} className="hover:bg-gray-700 px-4 py-2 rounded">
+            <button
+              onClick={handleLogout}
+              className="hover:bg-indigo-500 px-4 py-2 rounded transition-colors duration-300"
+            >
               Logout
             </button>
           )}
