@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import Navbar from "../Components/Navbar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SearchPage = () => {
   const [jobs, setJobs] = useState([]);
@@ -11,6 +12,7 @@ const SearchPage = () => {
   const [loading, setLoading] = useState(false);
 
   const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);
+  const nav = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -67,6 +69,22 @@ Only return an array of matching job objects.
     }
   };
 
+  const handleRequestSent = async (name, seller) => {
+    const data = {
+      name,
+      seller,
+    };
+    await axios.post("http://localhost:5400/requests/add", data, {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      },
+    });
+
+    nav("/");
+
+    alert("Succesfully requested");
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-pink-50">
       <Navbar />
@@ -119,7 +137,16 @@ Only return an array of matching job objects.
                 By <span className="font-semibold">{job.seller}</span>
               </p>
               <p className="text-gray-700 mb-1">Category: {job.category}</p>
-              <p className="text-pink-600 font-bold">₹{job.price}</p>
+              <p className="text-pink-600 font-bold mb-4">₹{job.price}</p>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleRequestSent(job.name, job.seller)}
+                className="w-full mt-2 py-2 px-4 bg-gradient-to-r from-indigo-500 to-pink-500 text-white font-semibold rounded-xl shadow-md transition-all hover:from-pink-500 hover:to-indigo-500"
+              >
+                📩 Request Service
+              </motion.button>
             </motion.div>
           ))}
         </div>
