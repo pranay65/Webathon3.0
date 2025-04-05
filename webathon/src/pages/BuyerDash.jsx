@@ -111,15 +111,15 @@ const BuyerDash = () => {
                   <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-xl mb-4">
                     💬
                   </div>
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">Messages</h3>
-                  <p className="text-gray-600">Chat with freelancers, discuss project details, and share files securely.</p>
+                  <h3 className="text-lg font-bold text-gray-800 mb-2">Create Project</h3>
+                  <p className="text-gray-600">Connect with freelancers and discuss project details.</p>
                 </div>
                 <div className="border-t border-gray-100 p-4">
                   <button 
-                    onClick={() => navigate("/messages")}
+                    onClick={() => navigate("/project")}
                     className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
                   >
-                    Go to Messages
+                    Create Project
                   </button>
                 </div>
               </div>
