@@ -7,7 +7,7 @@ const modalApp = express();
 
 modalApp.use(bodyParser.json());
 
-const key=process.env.GEMINI_API_KEY
+const key = process.env.GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(key);
 
 modalApp.post("/generate-pitch", async (req, res) => {
@@ -26,6 +26,8 @@ modalApp.post("/generate-pitch", async (req, res) => {
     Budget: ${pitchData.budget}
 
     Provide clear and concise paragraphs for each section.
+
+    Give it in plaintext, with no formatting.
   `;
 
   try {
@@ -38,10 +40,10 @@ modalApp.post("/generate-pitch", async (req, res) => {
     res.json({ success: true, generatedPitch });
   } catch (error) {
     console.error("Gemini API Error:", error);
-    res.status(500).json({ success: false, error: "Failed to generate pitch." });
+    res
+      .status(500)
+      .json({ success: false, error: "Failed to generate pitch." });
   }
 });
-
-
 
 module.exports = modalApp;

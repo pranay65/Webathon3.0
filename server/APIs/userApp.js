@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const expHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 const userApp = exp.Router();
+const { verifyToken } = require("../Middleware/authentication");
 
 const registerUser = expHandler(async (req, res) => {
   let user = req.body;
@@ -25,6 +26,7 @@ const registerUser = expHandler(async (req, res) => {
     userType: user.userType,
     skills: user.skills,
     certifications: user.certifications,
+    portfolio: [],
   };
 
   await usersCollection.insertOne(newUser);
@@ -55,7 +57,17 @@ const loginUser = expHandler(async (req, res) => {
   });
 });
 
+const getUser = expHandler(async (req, res) => {
+  let usersCollection = req.app.get("usersCollection");
+
+  const user = req.name;
+  const dbUser = await usersCollection.findOne({ name: user });
+
+  return res.send({ dbUser });
+});
+
 userApp.post("/register", registerUser);
 userApp.post("/login", loginUser);
+userApp.get("/type", verifyToken, getUser);
 
 module.exports = userApp;

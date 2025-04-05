@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaUser } from "react-icons/fa";
 
 function Navbar({ toggleSidebar }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -55,31 +55,7 @@ function Navbar({ toggleSidebar }) {
           </div>
 
           <div className="hidden md:flex items-center">
-            <div className="ml-10 flex items-baseline space-x-6">
-              <Link
-                to="/home"
-                className="text-white hover:text-gray-200 px-3 py-2 rounded-md transition-colors duration-300"
-              >
-                Home
-              </Link>
-              <Link
-                to="/about"
-                className="text-white hover:text-gray-200 px-3 py-2 rounded-md transition-colors duration-300"
-              >
-                About
-              </Link>
-              <Link
-                to="/services"
-                className="text-white hover:text-gray-200 px-3 py-2 rounded-md transition-colors duration-300"
-              >
-                Services
-              </Link>
-              <Link
-                to="/contact"
-                className="text-white hover:text-gray-200 px-3 py-2 rounded-md transition-colors duration-300"
-              >
-                Contact
-              </Link>
+            <div className="ml-10 flex items-center space-x-6">
               {!isLoggedIn ? (
                 <Link
                   to="/login"
@@ -88,12 +64,20 @@ function Navbar({ toggleSidebar }) {
                   Login
                 </Link>
               ) : (
-                <button
-                  onClick={handleLogout}
-                  className="text-white hover:text-gray-200 px-3 py-2 rounded-md transition-colors duration-300"
-                >
-                  Logout
-                </button>
+                <>
+                  <Link
+                    to="/profile"
+                    className="text-white hover:text-gray-200"
+                  >
+                    <FaUser className="h-6 w-6" />
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="text-white hover:text-gray-200 px-3 py-2 rounded-md transition-colors duration-300"
+                  >
+                    Logout
+                  </button>
+                </>
               )}
             </div>
           </div>
@@ -159,12 +143,17 @@ function Navbar({ toggleSidebar }) {
               Login
             </Link>
           ) : (
-            <button
-              onClick={handleLogout}
-              className="hover:bg-indigo-500 px-4 py-2 rounded transition-colors duration-300"
-            >
-              Logout
-            </button>
+            <div className="flex items-center space-x-2">
+              <Link to="/profile" onClick={() => setIsMenuOpen(false)}>
+                <FaUser className="h-6 w-6 text-white" />
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="hover:bg-indigo-500 px-4 py-2 rounded transition-colors duration-300"
+              >
+                Logout
+              </button>
+            </div>
           )}
         </div>
       </div>

@@ -9,6 +9,7 @@ import UserDash from "./pages/SellerDash";
 import BuyerDash from "./pages/BuyerDash";
 import PitchBuilder from "./pages/PitchBuilder";
 import ContractPage from "./pages/ContractPage";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -19,10 +20,11 @@ function App() {
         <Route path="/joblisting" element={<JobListing />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/seller" element={<UserDash/>}/>
-        <Route path="/buyer" element={<BuyerDash/>}/>
+        <Route path="/seller" element={<UserDash />} />
+        <Route path="/buyer" element={<BuyerDash />} />
         <Route path="/pitch" element={<PitchBuilder />} />
-        <Route path="/contract" element={<ContractPage />}/>
+        <Route path="/contract" element={<ContractPage />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );
