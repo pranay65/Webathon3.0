@@ -2,22 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @keyframes shine {
-  0% { transform: translateX(-100%) skewX(-15deg); }
-  100% { transform: translateX(100%) skewX(-15deg); }
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(100%) skewX(-15deg);
+  }
 }
 
 .animate-shine {
   animation: shine 2s infinite;
 }
 
-:root {
+* {
+  font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
 }
 
 .react-calendar-heatmap text {
