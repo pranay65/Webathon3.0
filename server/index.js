@@ -3,6 +3,7 @@ require("dotenv").config();
 const cors = require("cors");
 const userApp = require("./APIs/userApp");
 const jobsApp = require("./APIs/jobsApp");
+const modalApp = require("./APIs/modalApp");
 const app = exp();
 
 app.use(exp.json());
@@ -27,6 +28,7 @@ client
 
 app.use("/user", userApp);
 app.use("/jobs", jobsApp);
+app.use("/modal",modalApp);
 
 app.listen(port, () => {
   console.log(`Running on port: ${port}.`);
