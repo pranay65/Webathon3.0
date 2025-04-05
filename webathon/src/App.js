@@ -13,6 +13,7 @@ import Profile from "./pages/Profile";
 import SearchPage from "./pages/SearchPage";
 import Payment from "./Components/Payment";
 import TimeLine from "./pages/TimeLine";
+import CreateProject from "./pages/CreateProject";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/payment" element={<Payment jname="Web Development" />} />
         <Route path="/time " element={<TimeLine/>} />
+        <Route path="/createproject" element={<CreateProject/>} />
       </Routes>
     </Router>
   );
