@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Disclosure, Transition } from "@headlessui/react";
 import {
-  FiChevronDown,
   FiLinkedin,
   FiTwitter,
   FiInstagram,
@@ -37,13 +36,6 @@ function LandingPage() {
 
   const features = [
     {
-      icon: <FaUserCircle className="w-10 h-10" />,
-      title: "Personalized Profiles",
-      description:
-        "Create detailed profiles showcasing your skills and experience",
-      link: "buyer",
-    },
-    {
       icon: <FaRobot className="w-10 h-10" />,
       title: "AI-Powered Matching",
       description:
@@ -75,12 +67,6 @@ function LandingPage() {
       icon: <FaMedal className="w-10 h-10" />,
       title: "Skill Verification",
       description: "Verified skills and achievements recognition",
-    },
-    {
-      icon: <FaChartLine className="w-10 h-10" />,
-      title: "Project Dashboard",
-      description: "Complete suite of project management tools",
-      link: "seller",
     },
   ];
 

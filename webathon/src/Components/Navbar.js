@@ -38,12 +38,6 @@ function Navbar({ toggleSidebar }) {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <button
-              onClick={toggleSidebar}
-              className="text-white hover:text-gray-200 p-2 transition-colors duration-300"
-            >
-              <FaBars className="h-6 w-6" />
-            </button>
             <div className="flex-shrink-0">
               <Link
                 to="/"

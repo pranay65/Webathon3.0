@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../Components/Navbar";
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -32,43 +33,70 @@ export default function LoginPage() {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="p-8 max-w-xl mx-auto bg-gradient-to-br from-white via-indigo-50 to-pink-50 rounded-2xl shadow-2xl mt-10 border border-gray-200"
-    >
-      <h1 className="text-4xl font-extrabold text-center mb-8 bg-gradient-to-r from-indigo-500 to-pink-500 text-transparent bg-clip-text">
-        Login
-      </h1>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <input
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          className="w-full p-3 rounded-xl border border-gray-300 hover:shadow-md focus:ring-2 focus:ring-indigo-300 transition"
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-          className="w-full p-3 rounded-xl border border-gray-300 hover:shadow-md focus:ring-2 focus:ring-pink-300 transition"
-        />
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-          <button
-            type="submit"
-            className="w-full text-white font-bold py-3 text-lg bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-indigo-500 transition-all duration-300 rounded-xl shadow-md"
-          >
-            🔐 Login
-          </button>
+    <>
+      <Navbar />
+      <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-pink-100 pt-24 px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="w-full max-w-md mx-auto bg-white bg-opacity-90 backdrop-blur-md rounded-3xl shadow-2xl p-10 border border-gray-200"
+        >
+          <h1 className="text-4xl font-extrabold text-center mb-10 bg-gradient-to-r from-indigo-500 to-pink-500 text-transparent bg-clip-text">
+            Login
+          </h1>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Name
+              </label>
+              <input
+                name="name"
+                placeholder="Enter your name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-300 transition shadow-sm"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Password
+              </label>
+              <input
+                name="password"
+                type="password"
+                placeholder="Enter your password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-pink-300 transition shadow-sm"
+              />
+            </div>
+
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+              <button
+                type="submit"
+                className="w-full py-3 text-white text-lg font-semibold rounded-xl bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-pink-500 hover:to-indigo-500 transition-all duration-300 shadow-md"
+              >
+                🔐 Login
+              </button>
+            </motion.div>
+          </form>
+
+          <p className="text-sm text-center text-gray-600 mt-6">
+            New here?{" "}
+            <Link
+              to="/register"
+              className="text-indigo-600 hover:underline font-semibold"
+            >
+              Register Now!
+            </Link>
+          </p>
         </motion.div>
-        New here? <Link to="/register">Register Now!</Link>
-      </form>
-    </motion.div>
+      </div>
+    </>
   );
 }
