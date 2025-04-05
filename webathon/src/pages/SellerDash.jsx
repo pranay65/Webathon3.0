@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function SellerDash() {
   const [tasks, setTasks] = useState([
@@ -45,7 +46,43 @@ function SellerDash() {
     );
   };
 
-  const handleAcceptRequest = async () => {};
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axios.get("http://localhost:5400/requests/", {
+          headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
+        });
+        const requestsData = res.data.payload;
+        setRequests(requestsData);
+      } catch (err) {
+        console.error("Error fetching jobs:", err);
+      }
+    }
+    fetchData();
+  }, [requests]);
+
+  const handleAcceptRequest = async (reqName) => {
+    try {
+      const res = await axios.put("http://localhost:5400/requests/accept", {
+        reqName,
+      });
+
+      if (res.data.status === 200) {
+        setRequests((prev) =>
+          prev.map((req) =>
+            req.name === reqName ? { ...req, status: "accepted" } : req
+          )
+        );
+      } else {
+        alert("Failed to accept the request.");
+      }
+    } catch (error) {
+      console.error("Error accepting request:", error);
+      alert("An error occurred while accepting the request.");
+    }
+  };
 
   const handleAddTask = () => {
     if (newTask.title.trim() === "") return;
@@ -146,17 +183,8 @@ function SellerDash() {
           </div>
 
           {/* Kanban Header + Add Task Button */}
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-gray-800">Task Board</h2>
-            <button
-              onClick={() => setIsAddingTask(!isAddingTask)}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg flex items-center"
-            >
-              {isAddingTask ? "Cancel" : "+ Add Task"}
-            </button>
-          </div>
 
-          <div className="mt-8 bg-gray-50 p-6 rounded-lg border border-gray-200">
+          <div className="mt-8 bg-gray-50 p-6 rounded-lg border border-gray-200 mb-8">
             <h2 className="text-xl font-bold text-gray-800 mb-4">
               Pending Requests
             </h2>
@@ -180,7 +208,7 @@ function SellerDash() {
                         </p>
                       </div>
                       <button
-                        onClick={() => handleAcceptRequest(request.id)}
+                        onClick={() => handleAcceptRequest(request.name)}
                         className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg"
                       >
                         Accept
@@ -189,6 +217,16 @@ function SellerDash() {
                   ))}
               </div>
             )}
+          </div>
+
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold text-gray-800">Task Board</h2>
+            <button
+              onClick={() => setIsAddingTask(!isAddingTask)}
+              className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg flex items-center"
+            >
+              {isAddingTask ? "Cancel" : "+ Add Task"}
+            </button>
           </div>
 
           {/* Add Task Form */}
