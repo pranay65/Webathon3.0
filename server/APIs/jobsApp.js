@@ -1,6 +1,7 @@
 const exp = require("express");
 require("dotenv").config();
 const expHandler = require("express-async-handler");
+const { verifyToken } = require("../Middleware/authentication");
 const jobsApp = exp.Router();
 
 const addJob = expHandler(async (req, res) => {
@@ -30,7 +31,7 @@ const getJobs = expHandler(async (req, res) => {
   return res.send({ payload: data });
 });
 
-jobsApp.post("/add", addJob);
+jobsApp.post("/add", verifyToken, addJob);
 jobsApp.get("/", getJobs);
 
 module.exports = jobsApp;
