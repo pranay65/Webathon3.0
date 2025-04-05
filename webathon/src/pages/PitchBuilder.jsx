@@ -1,0 +1,279 @@
+import React, { useState } from "react";
+
+const PitchBuilder = () => {
+  const initialPitch = {
+    title: "",
+    problem: "",
+    solution: "",
+    features: "",
+    timeline: "",
+    budget: "",
+    targetAudience: "",
+    marketPotential: ""
+  };
+
+  const [pitch, setPitch] = useState(initialPitch);
+  const [activeStep, setActiveStep] = useState(0);
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setPitch({ ...pitch, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    
+    // Simulate API call delay
+    setTimeout(() => {
+      setLoading(false);
+      setSubmitted(true);
+    }, 1000);
+  };
+
+  const handleNext = () => {
+    setActiveStep(prev => Math.min(prev + 1, steps.length - 1));
+  };
+
+  const handlePrev = () => {
+    setActiveStep(prev => Math.max(prev - 1, 0));
+  };
+
+  const handleReset = () => {
+    setPitch(initialPitch);
+    setActiveStep(0);
+    setSubmitted(false);
+  };
+
+  const steps = [
+    {
+      title: "Project Basics",
+      fields: [
+        { name: "title", label: "Project Title", type: "text", placeholder: "e.g., AI-powered Resume Builder" },
+        { name: "targetAudience", label: "Target Audience", type: "text", placeholder: "Who will benefit from your solution?" }
+      ]
+    },
+    {
+      title: "Problem & Solution",
+      fields: [
+        { name: "problem", label: "Problem Statement", type: "textarea", placeholder: "Describe the problem your project aims to solve." },
+        { name: "solution", label: "Your Solution", type: "textarea", placeholder: "How do you envision solving the problem?" }
+      ]
+    },
+    {
+      title: "Details & Logistics",
+      fields: [
+        { name: "features", label: "Core Features", type: "textarea", placeholder: "List the key features you want included." },
+        { name: "marketPotential", label: "Market Potential", type: "textarea", placeholder: "Describe the market opportunity and potential impact." },
+        { name: "timeline", label: "Expected Timeline", type: "text", placeholder: "e.g., 2 weeks" },
+        { name: "budget", label: "Budget (in USD)", type: "number", placeholder: "e.g., 500" }
+      ]
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-10 px-4">
+      <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6">
+          <h1 className="text-2xl font-bold flex items-center">
+            <span className="mr-2">📌</span> Professional Pitch Builder
+          </h1>
+          <p className="mt-2 opacity-90">Create a compelling project pitch in minutes</p>
+        </div>
+
+        {!submitted ? (
+          <>
+            {/* Progress Bar */}
+            <div className="px-6 pt-6">
+              <div className="flex justify-between mb-2">
+                {steps.map((step, index) => (
+                  <button 
+                    key={index}
+                    onClick={() => setActiveStep(index)}
+                    className={`text-sm font-medium ${activeStep >= index ? 'text-blue-600' : 'text-gray-400'}`}
+                  >
+                    {step.title}
+                  </button>
+                ))}
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2.5">
+                <div 
+                  className="bg-blue-600 h-2.5 rounded-full transition-all duration-300" 
+                  style={{ width: `${((activeStep + 1) / steps.length) * 100}%` }}
+                ></div>
+              </div>
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleSubmit} className="p-6">
+              <div className="mb-6">
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">{steps[activeStep].title}</h2>
+                
+                {steps[activeStep].fields.map((field) => (
+                  <div key={field.name} className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      {field.label}
+                    </label>
+                    {field.type === "textarea" ? (
+                      <textarea
+                        name={field.name}
+                        value={pitch[field.name]}
+                        onChange={handleChange}
+                        placeholder={field.placeholder}
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                        rows={4}
+                      />
+                    ) : (
+                      <input
+                        type={field.type}
+                        name={field.name}
+                        value={pitch[field.name]}
+                        onChange={handleChange}
+                        placeholder={field.placeholder}
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex justify-between">
+                <button
+                  type="button"
+                  onClick={handlePrev}
+                  disabled={activeStep === 0}
+                  className={`px-4 py-2 rounded-lg font-medium ${
+                    activeStep === 0 
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  }`}
+                >
+                  Back
+                </button>
+                
+                {activeStep < steps.length - 1 ? (
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                  >
+                    Next
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center"
+                  >
+                    {loading ? (
+                      <>
+                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Generating...
+                      </>
+                    ) : (
+                      'Generate Pitch'
+                    )}
+                  </button>
+                )}
+              </div>
+            </form>
+          </>
+        ) : (
+          <div className="p-6">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-bold text-gray-800">📝 Your Professional Pitch</h2>
+              <button 
+                onClick={handleReset}
+                className="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                Create New Pitch
+              </button>
+            </div>
+            
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-100">
+              <div className="mb-6">
+                <h1 className="text-2xl font-bold text-gray-800 mb-2">{pitch.title}</h1>
+                {pitch.targetAudience && (
+                  <div className="text-sm bg-blue-100 text-blue-800 px-3 py-1 rounded-full inline-block">
+                    Target: {pitch.targetAudience}
+                  </div>
+                )}
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <h3 className="font-bold text-gray-800 mb-2 flex items-center">
+                    <span className="text-red-500 mr-2">⚠️</span> Problem
+                  </h3>
+                  <p className="text-gray-700 whitespace-pre-wrap">{pitch.problem}</p>
+                </div>
+                
+                <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <h3 className="font-bold text-gray-800 mb-2 flex items-center">
+                    <span className="text-green-500 mr-2">💡</span> Solution
+                  </h3>
+                  <p className="text-gray-700 whitespace-pre-wrap">{pitch.solution}</p>
+                </div>
+              </div>
+              
+              <div className="mt-6 bg-white p-4 rounded-lg shadow-sm">
+                <h3 className="font-bold text-gray-800 mb-2 flex items-center">
+                  <span className="text-blue-500 mr-2">⭐</span> Key Features
+                </h3>
+                <p className="text-gray-700 whitespace-pre-wrap">{pitch.features}</p>
+              </div>
+              
+              {pitch.marketPotential && (
+                <div className="mt-6 bg-white p-4 rounded-lg shadow-sm">
+                  <h3 className="font-bold text-gray-800 mb-2 flex items-center">
+                    <span className="text-purple-500 mr-2">📈</span> Market Potential
+                  </h3>
+                  <p className="text-gray-700 whitespace-pre-wrap">{pitch.marketPotential}</p>
+                </div>
+              )}
+              
+              <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <h3 className="font-bold text-gray-800 mb-2">⏱️ Timeline</h3>
+                  <p className="text-gray-700">{pitch.timeline || "Not specified"}</p>
+                </div>
+                
+                <div className="bg-white p-4 rounded-lg shadow-sm">
+                  <h3 className="font-bold text-gray-800 mb-2">💰 Budget</h3>
+                  <p className="text-gray-700 text-lg font-semibold">
+                    {pitch.budget ? `$${Number(pitch.budget).toLocaleString()}` : "Not specified"}
+                  </p>
+                </div>
+              </div>
+              
+              <div className="mt-6 flex justify-center">
+                <div className="flex space-x-4">
+                  <button className="flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                    </svg>
+                    Share
+                  </button>
+                  <button className="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Download PDF
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default PitchBuilder;

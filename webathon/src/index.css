@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+@keyframes shine {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(100%) skewX(-15deg); }
+}
+
+.animate-shine {
+  animation: shine 2s infinite;
+}
+
 :root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;

@@ -70,6 +70,7 @@ function LandingPage() {
     {
       name: "Sarah Johnson",
       role: "UI/UX Designer",
+      
       image: "https://randomuser.me/api/portraits/women/1.jpg",
       text: "FreelanceHub transformed my freelancing career. The AI matching system consistently connects me with ideal clients.",
     },
