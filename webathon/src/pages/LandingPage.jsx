@@ -16,11 +16,11 @@ import {
   FaFileContract,
   FaLock,
   FaMedal,
-  FaChartLine,
   FaAngleDown,
   FaQuoteLeft,
 } from "react-icons/fa";
 import Navbar from "../Components/Navbar";
+import { Link } from "react-router-dom";
 
 function LandingPage() {
   const [isVisible, setIsVisible] = useState(false);
@@ -214,15 +214,16 @@ function LandingPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.8 }}
               >
-                <motion.button
-                  className="flex items-center justify-center gap-2 bg-white text-[#5C6BC0] px-8 py-4 rounded-full font-semibold text-lg hover:bg-opacity-90 hover:shadow-lg transition group"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Find Freelancers
-                  <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-                </motion.button>
-
+                <Link to="/search">
+                  <motion.button
+                    className="flex items-center justify-center gap-2 bg-white text-[#5C6BC0] px-8 py-4 rounded-full font-semibold text-lg hover:bg-opacity-90 hover:shadow-lg transition group"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Find Freelancers
+                    <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+                  </motion.button>
+                </Link>
                 <motion.button
                   className="flex items-center justify-center gap-2 border-2 border-white bg-transparent px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-[#5C6BC0] transition group"
                   whileHover={{ scale: 1.05 }}

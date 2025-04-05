@@ -10,6 +10,7 @@ import BuyerDash from "./pages/BuyerDash";
 import PitchBuilder from "./pages/PitchBuilder";
 import ContractPage from "./pages/ContractPage";
 import Profile from "./pages/Profile";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/pitch" element={<PitchBuilder />} />
         <Route path="/contract" element={<ContractPage />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/search" element={<SearchPage />} />
       </Routes>
     </Router>
   );
