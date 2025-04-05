@@ -1,0 +1,36 @@
+const exp = require("express");
+require("dotenv").config();
+const expHandler = require("express-async-handler");
+const jobsApp = exp.Router();
+
+const addJob = expHandler(async (req, res) => {
+  let job = req.body;
+  let usersCollection = req.app.get("usersCollection");
+  let jobsCollection = req.app.get("jobsCollection");
+
+  const currSeller = job.seller;
+  const dbUser = await usersCollection.findOne({ name: currSeller });
+
+  if (dbUser.userType != "seller") {
+    return res.send({ status: 400, message: "Not a seller" });
+  }
+
+  await jobsCollection.insertOne({ job });
+
+  return res.send({ status: 200, message: "Added successfully" });
+});
+
+const getJobs = expHandler(async (req, res) => {
+  let jobsCollection = req.app.get("jobsCollection");
+
+  const data = await jobsCollection.find({}).toArray();
+  if (!data) {
+    data = [];
+  }
+  return res.send({ payload: data });
+});
+
+jobsApp.post("/add", addJob);
+jobsApp.get("/", getJobs);
+
+module.exports = jobsApp;

@@ -1,44 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { motion } from "framer-motion";
 
 function JobListing() {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [jobs, setJobs] = useState([]);
 
-  const jobs = [
-    {
-      id: 1,
-      name: "Logo Design",
-      seller: "John Doe",
-      category: "Design",
-      price: 2000,
-      rating: 4.8,
-      image: "https://via.placeholder.com/150"
-    },
-    {
-      id: 2,
-      name: "Web Development",
-      seller: "Jane Smith",
-      category: "Development",
-      price: 5000,
-      rating: 4.9,
-      image: "https://via.placeholder.com/150"
-    },
-    {
-      id: 3,
-      name: "SEO Optimization",
-      seller: "Ali Khan",
-      category: "Marketing",
-      price: 3000,
-      rating: 4.5,
-      image: "https://via.placeholder.com/150"
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axios.get("http://localhost:5400/jobs/");
+        const flatJobs = res.data.payload.map((item) => ({
+          _id: item._id,
+          ...item.job,
+        }));
+        setJobs(flatJobs);
+      } catch (err) {
+        console.error("Error fetching jobs:", err);
+      }
     }
-  ];
+    fetchData();
+  }, []);
 
-  const categories = ["All", ...new Set(jobs.map(job => job.category))];
+  const categories = ["All", ...new Set(jobs.map((job) => job.category))];
 
-  const filteredJobs = selectedCategory === "All"
-    ? jobs
-    : jobs.filter(job => job.category === selectedCategory);
+  const filteredJobs =
+    selectedCategory === "All"
+      ? jobs
+      : jobs.filter((job) => job.category === selectedCategory);
 
   return (
     <div>
@@ -48,7 +37,7 @@ function JobListing() {
         </h1>
 
         <div className="flex justify-center mb-6 flex-wrap gap-4">
-          {categories.map(category => (
+          {categories.map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
@@ -64,9 +53,9 @@ function JobListing() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredJobs.map(job => (
+          {filteredJobs.map((job) => (
             <motion.div
-              key={job.id}
+              key={job._id}
               whileHover={{ scale: 1.03 }}
               transition={{ duration: 0.3 }}
               className="bg-white rounded-2xl shadow-lg p-6 border hover:border-indigo-400 transition-all"
@@ -76,13 +65,14 @@ function JobListing() {
                 alt={job.name}
                 className="w-full h-40 object-cover rounded-xl mb-4"
               />
-              <h2 className="text-xl font-bold mb-2 text-indigo-600">{job.name}</h2>
+              <h2 className="text-xl font-bold mb-2 text-indigo-600">
+                {job.name}
+              </h2>
               <p className="text-gray-600 mb-1">
                 By <span className="font-semibold">{job.seller}</span>
               </p>
               <p className="text-gray-700 mb-1">Category: {job.category}</p>
               <p className="text-pink-600 font-bold">₹{job.price}</p>
-              <div className="mt-2 text-yellow-500 font-semibold">⭐ {job.rating}</div>
             </motion.div>
           ))}
         </div>
