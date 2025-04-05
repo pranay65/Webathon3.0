@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate,Link } from "react-router-dom";
+import Navbar from "../Components/Navbar";
 
 
 const BuyerDash = () => {
@@ -31,6 +32,7 @@ const BuyerDash = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-gray-100 p-6">
+      <Navbar />
       <div className="max-w-6xl mx-auto">
         {/* Header with user info */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-8">
@@ -70,7 +72,7 @@ const BuyerDash = () => {
             <h2 className="text-xl font-bold text-gray-800 mb-4">Quick Actions</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
               {/* Post a Job */}
-              <Link to="/joblisting">
+              <Link to="/search">
               <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 flex flex-col h-full hover:shadow-md transition-shadow">
                 <div className="p-6 flex-grow">
                   <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-xl mb-4">
