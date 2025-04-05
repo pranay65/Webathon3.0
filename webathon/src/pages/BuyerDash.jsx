@@ -70,21 +70,21 @@ const BuyerDash = () => {
             <h2 className="text-xl font-bold text-gray-800 mb-4">Quick Actions</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
               {/* Post a Job */}
-              <Link to="/postjob">
+              <Link to="/joblisting">
               <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 flex flex-col h-full hover:shadow-md transition-shadow">
                 <div className="p-6 flex-grow">
                   <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-xl mb-4">
-                    ➕
+                  👀
                   </div>
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">Post a Job</h3>
-                  <p className="text-gray-600">Create a new freelance project and invite proposals from qualified professionals.</p>
+                  <h3 className="text-lg font-bold text-gray-800 mb-2">View Jobs</h3>
+                  <p className="text-gray-600">Select a job from your dashboard to view details and proposals.</p>
                 </div>
                 <div className="border-t border-gray-100 p-4">
                   <button 
                     onClick={() => navigate("/post-job")}
                     className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
                   >
-                    Create Job
+                    Search Job
                   </button>
                 </div>
               </div>
