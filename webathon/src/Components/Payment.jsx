@@ -1,16 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-export function Payment() {
-  const location = useLocation();
-  const job = 
+export function Payment({ jname }) {
+  const [job, setJob] = useState(null);
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: ''
+    name: "",
+    email: "",
+    phone: "",
   });
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axios.post("http://localhost:5400/jobs/pay", {
+          jname,
+        });
+        const job = res.data.payload;
+        setJob(job);
+      } catch (err) {
+        console.error("Error fetching jobs:", err);
+      }
+    }
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -22,7 +35,7 @@ export function Payment() {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -33,37 +46,39 @@ export function Payment() {
     }
 
     try {
-      const response = await axios.post("http://localhost:4700/razorpay/create-order", {
-        amount: job.prize
-      });
+      const response = await axios.post(
+        "http://localhost:5400/razorpay/create-order",
+        {
+          amount: job.price,
+        }
+      );
 
       const options = {
-        key: 'rzp_test_ZYP4VtDJ8ML7aq',
-        amount: job.prize * 100,
+        key: "rzp_test_ZYP4VtDJ8ML7aq",
+        amount: job.price * 100,
         currency: "INR",
         order_id: response.data.OrderId,
         name: "Job Payment",
-        description: `Payment for Job: ${job.title}`,
+        description: `Payment for Job: ${job.name}`,
         prefill: {
           name: formData.name,
           email: formData.email,
-          contact: formData.phone
+          contact: formData.phone,
         },
         handler: function (res) {
           alert("Payment successful!");
           console.log(res);
         },
         theme: {
-          color: "#3399cc"
-        }
+          color: "#3399cc",
+        },
       };
 
       const rzpay = new window.Razorpay(options);
       rzpay.open();
-      rzpay.on('payment.failed', function () {
+      rzpay.on("payment.failed", function () {
         alert("Payment failed. Please try again.");
       });
-
     } catch (err) {
       console.error(err);
       alert("Error initiating payment.");
@@ -71,7 +86,11 @@ export function Payment() {
   };
 
   if (!job) {
-    return <div className="text-center text-red-500 mt-10">❌ Job data is missing. Please try again.</div>;
+    return (
+      <div className="text-center text-red-500 mt-10">
+        ❌ Job data is missing. Please try again.
+      </div>
+    );
   }
 
   return (
@@ -105,16 +124,17 @@ export function Payment() {
         />
 
         <div className="mt-6 border-t pt-4">
-          <p className="font-medium">Job Title: <span className="font-semibold">{job.title}</span></p>
-          <p className="text-sm text-gray-600">Job ID: {job.id}</p>
-          <p className="font-bold text-lg mt-2">Amount to Pay: ₹{job.prize}</p>
+          <p className="font-medium">
+            Job Title: <span className="font-semibold">{job.name}</span>
+          </p>
+          <p className="font-bold text-lg mt-2">Amount to Pay: ₹{job.price}</p>
         </div>
 
         <button
           onClick={proceedPayment}
           className="w-full bg-green-500 text-white py-3 rounded-md hover:bg-green-600 font-semibold mt-4"
         >
-          Pay ₹{job.prize}
+          Pay ₹{job.price}
         </button>
       </div>
     </div>

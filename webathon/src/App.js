@@ -28,7 +28,7 @@ function App() {
         <Route path="/contract" element={<ContractPage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/search" element={<SearchPage />} />
-        <Route path="/payment" element={<Payment />} />
+        <Route path="/payment" element={<Payment jname="Web Development" />} />
       </Routes>
     </Router>
   );

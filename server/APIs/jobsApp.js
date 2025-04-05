@@ -31,7 +31,20 @@ const getJobs = expHandler(async (req, res) => {
   return res.send({ payload: data });
 });
 
+const getJob = expHandler(async (req, res) => {
+  let jobsCollection = req.app.get("jobsCollection");
+
+  const data = await jobsCollection.findOne({ "job.name": req.body.jname });
+
+  if (!data) {
+    data = [];
+  }
+
+  return res.send({ payload: data.job });
+});
+
 jobsApp.post("/add", verifyToken, addJob);
 jobsApp.get("/", getJobs);
+jobsApp.post("/pay", getJob);
 
 module.exports = jobsApp;
