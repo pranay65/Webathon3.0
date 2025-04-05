@@ -65,9 +65,6 @@ function SellerDash() {
               <div className="bg-white bg-opacity-20 px-4 py-2 rounded-lg text-sm">
                 {new Date().toLocaleDateString()}
               </div>
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-indigo-600 font-bold">
-                US
-              </div>
             </div>
           </div>
         </div>

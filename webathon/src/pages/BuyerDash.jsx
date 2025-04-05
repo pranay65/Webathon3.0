@@ -31,22 +31,16 @@ const BuyerDash = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-gray-100 p-6">
+    <div>
       <Navbar />
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-gray-100 p-6 z-50">
+      
+      <div className="max-w-6xl mx-auto mt-12">
         {/* Header with user info */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold text-gray-800">Buyer Dashboard</h1>
             <p className="text-gray-500">Welcome back! Here's what's happening with your projects</p>
-          </div>
-          <div className="mt-4 md:mt-0 flex items-center">
-            <div className="bg-white p-2 rounded-lg shadow-sm mr-4">
-              <span className="text-blue-600 font-medium">Premium Account</span>
-            </div>
-            <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-              JD
-            </div>
           </div>
         </div>
         
@@ -225,6 +219,7 @@ const BuyerDash = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
