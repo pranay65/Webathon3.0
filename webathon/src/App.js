@@ -11,6 +11,7 @@ import PitchBuilder from "./pages/PitchBuilder";
 import ContractPage from "./pages/ContractPage";
 import Profile from "./pages/Profile";
 import SearchPage from "./pages/SearchPage";
+import Payment from "./Components/Payment";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/contract" element={<ContractPage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
     </Router>
   );
