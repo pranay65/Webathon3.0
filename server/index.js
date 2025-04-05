@@ -13,7 +13,7 @@ const client = require("mongodb").MongoClient;
 client
   .connect(process.env.DBURL)
   .then((client) => {
-    const database = client.db("softwareDB");
+    const database = client.db("freeDB");
     const usersCollection = database.collection("users");
     app.set("usersCollection", usersCollection);
     console.log("Database Connected Successfully!");

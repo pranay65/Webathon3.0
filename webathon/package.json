@@ -8,7 +8,7 @@
     "@heroicons/react": "^2.2.0",
     "@shadcn/ui": "^0.0.4",
     "autoprefixer": "^10.4.20",
-    "axios": "^1.7.9",
+    "axios": "^1.8.4",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.7",
     "cra-template": "1.2.0",

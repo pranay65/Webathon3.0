@@ -14,9 +14,17 @@ const registerUser = expHandler(async (req, res) => {
     return res.send({ status: 400, message: "User already exists!" });
   }
   const hashed = await bcrypt.hash(user.password, 5);
+
+  if (user.userType == "buyer") {
+    (user.skills = []), (user.certifications = []);
+  }
+
   const newUser = {
     name: username,
     password: hashed,
+    userType: user.userType,
+    skills: user.skills,
+    certifications: user.certifications,
   };
 
   await usersCollection.insertOne(newUser);
