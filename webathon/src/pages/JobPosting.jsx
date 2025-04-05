@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 function JobPosting() {
   const [formData, setFormData] = useState({
@@ -7,20 +9,29 @@ function JobPosting() {
     seller: "",
     category: "",
     price: "",
-    rating: "",
     image: "",
-    description: ""
+    description: "",
   });
+
+  const nav = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    await axios.post("http://localhost:5400/jobs/add", formData, {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      },
+    });
+
+    nav("/joblisting");
+
     console.log("Submitted Job:", formData);
-    // Here you can call your backend API
   };
 
   return (
@@ -43,7 +54,7 @@ function JobPosting() {
         />
         <input
           name="seller"
-          placeholder="Your Name (Seller)"
+          placeholder="Username"
           onChange={handleChange}
           required
           className="w-full p-3 rounded-xl border border-gray-300 hover:shadow-md focus:ring-2 focus:ring-pink-300 transition"
@@ -63,14 +74,7 @@ function JobPosting() {
           required
           className="w-full p-3 rounded-xl border border-gray-300 hover:shadow-md focus:ring-2 focus:ring-pink-300 transition"
         />
-        <input
-          name="rating"
-          type="number"
-          step="0.1"
-          placeholder="Rating (1-5)"
-          onChange={handleChange}
-          className="w-full p-3 rounded-xl border border-gray-300 hover:shadow-md focus:ring-2 focus:ring-indigo-300 transition"
-        />
+
         <input
           name="image"
           type="url"
@@ -99,6 +103,5 @@ function JobPosting() {
     </motion.div>
   );
 }
-
 
 export default JobPosting;
