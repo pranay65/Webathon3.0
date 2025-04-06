@@ -116,12 +116,12 @@ const BuyerDash = () => {
                 </div>
                 <div className="border-t border-gray-100 p-4">
                   <button 
-                    onClick={() => navigate("/project")}
+                    onClick={() => navigate("/createproject")}
                     className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
                   >
                     Create Project
                   </button>
-                </div>
+                    </div>
               </div>
               
               {/* Payments */}

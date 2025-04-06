@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Navbar from "../Components/Navbar";
 
 const CreateProject = () => {
   const [formData, setFormData] = useState({
@@ -44,8 +45,11 @@ const CreateProject = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
-      <div className="w-full max-w-xl bg-white rounded-lg shadow-md p-8">
+    <div>
+         <Navbar/>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6 ">
+       
+      <div className="w-full max-w-xl bg-white rounded-lg shadow-md p-8 mt-14">
         <h2 className="text-2xl font-bold text-indigo-600 mb-6">Create New Project</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -110,6 +114,7 @@ const CreateProject = () => {
           </button>
         </form>
       </div>
+    </div>
     </div>
   );
 };
