@@ -6,6 +6,7 @@ const jobsApp = require("./APIs/jobsApp");
 const modalApp = require("./APIs/modalApp");
 const requestsApp = require("./APIs/requestsApp");
 const razorApp = require("./APIs/RazorPay.js");
+const projectApp = require("./APIs/ProjectApp.js")
 const app = exp();
 
 app.use(exp.json());
@@ -21,6 +22,8 @@ client
     const usersCollection = database.collection("users");
     const jobsCollection = database.collection("jobs");
     const requestsCollection = database.collection("requests");
+    const projectsCollection = database.collection("projects");
+    app.set("projectsCollection", projectsCollection);
     app.set("usersCollection", usersCollection);
     app.set("jobsCollection", jobsCollection);
     app.set("requestsCollection", requestsCollection);
@@ -35,6 +38,8 @@ app.use("/jobs", jobsApp);
 app.use("/modal", modalApp);
 app.use("/requests", requestsApp);
 app.use("/razorpay", razorApp);
+app.use("/projects",projectApp)
+
 
 app.listen(port, () => {
   console.log(`Running on port: ${port}.`);

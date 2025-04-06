@@ -88,7 +88,7 @@ Only return an array of matching job objects.
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-pink-50">
       <Navbar />
-      <div className="max-w-6xl mx-auto p-6">
+      <div className="max-w-6xl mx-auto p-6 pt-24">
         <h2 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-indigo-500 to-pink-500 text-transparent bg-clip-text">
           Explore Freelance Services
         </h2>

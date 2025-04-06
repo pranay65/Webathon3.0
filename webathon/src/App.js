@@ -12,7 +12,7 @@ import ContractPage from "./pages/ContractPage";
 import Profile from "./pages/Profile";
 import SearchPage from "./pages/SearchPage";
 import Payment from "./Components/Payment";
-import Certifications from "./pages/Certifications"
+
 function App() {
   return (
     <Router>
@@ -29,7 +29,6 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/payment" element={<Payment jname="Web Development" />} />
-        <Route path="/certifications" element={<Certifications />} />
       </Routes>
     </Router>
   );

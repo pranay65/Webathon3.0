@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function SellerDash() {
@@ -27,7 +28,6 @@ function SellerDash() {
   ]);
 
   const [requests, setRequests] = useState([]);
-
   const [newTask, setNewTask] = useState({
     title: "",
     priority: "Medium",
@@ -46,6 +46,7 @@ function SellerDash() {
     );
   };
 
+  // Removed dependency on requests so that data is fetched only once on mount.
   useEffect(() => {
     async function fetchData() {
       try {
@@ -61,7 +62,9 @@ function SellerDash() {
       }
     }
     fetchData();
-  }, [requests]);
+  }, []);
+
+  const nav = useNavigate()
 
   const handleAcceptRequest = async (reqName) => {
     try {
@@ -82,6 +85,8 @@ function SellerDash() {
       console.error("Error accepting request:", error);
       alert("An error occurred while accepting the request.");
     }
+    nav("/time");
+
   };
 
   const handleAddTask = () => {
@@ -113,7 +118,7 @@ function SellerDash() {
     }
   };
 
-  const timeTracked = 5.25; // Example in hours
+  const timeTracked = 5.25; // example value in hours
   const hourlyRate = 20;
   const totalBill = timeTracked * hourlyRate;
 
@@ -128,10 +133,8 @@ function SellerDash() {
         <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-6 text-white">
           <div className="flex justify-between items-center">
             <h1 className="text-3xl font-bold">User Dashboard</h1>
-            <div className="flex items-center space-x-2">
-              <div className="bg-white bg-opacity-20 px-4 py-2 rounded-lg text-sm">
-                {new Date().toLocaleDateString()}
-              </div>
+            <div className="bg-white bg-opacity-20 px-4 py-2 rounded-lg text-sm">
+              {new Date().toLocaleDateString()}
             </div>
           </div>
         </div>
@@ -140,30 +143,18 @@ function SellerDash() {
         <div className="p-6">
           {/* Stats Overview */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-            <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 p-4 rounded-lg shadow-sm">
-              <h3 className="text-sm font-medium text-indigo-600 mb-1">
-                Total Tasks
-              </h3>
-              <p className="text-2xl font-bold">{tasks.length}</p>
-            </div>
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg shadow-sm">
-              <h3 className="text-sm font-medium text-purple-600 mb-1">
-                Completed
-              </h3>
-              <p className="text-2xl font-bold">{completedTasks}</p>
-            </div>
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg shadow-sm">
-              <h3 className="text-sm font-medium text-blue-600 mb-1">
-                Time Tracked
-              </h3>
-              <p className="text-2xl font-bold">{timeTracked} hrs</p>
-            </div>
-            <div className="bg-gradient-to-br from-pink-50 to-pink-100 p-4 rounded-lg shadow-sm">
-              <h3 className="text-sm font-medium text-pink-600 mb-1">
-                Current Bill
-              </h3>
-              <p className="text-2xl font-bold">${totalBill.toFixed(2)}</p>
-            </div>
+            <StatCard title="Total Tasks" value={tasks.length} color="indigo" />
+            <StatCard title="Completed" value={completedTasks} color="purple" />
+            <StatCard
+              title="Time Tracked"
+              value={`${timeTracked} hrs`}
+              color="blue"
+            />
+            <StatCard
+              title="Current Bill"
+              value={`$${totalBill.toFixed(2)}`}
+              color="pink"
+            />
           </div>
 
           {/* Progress Bar */}
@@ -178,12 +169,11 @@ function SellerDash() {
               <div
                 className="bg-indigo-600 h-2.5 rounded-full"
                 style={{ width: `${completionPercentage}%` }}
-              ></div>
+              />
             </div>
           </div>
 
-          {/* Kanban Header + Add Task Button */}
-
+          {/* Pending Requests */}
           <div className="mt-8 bg-gray-50 p-6 rounded-lg border border-gray-200 mb-8">
             <h2 className="text-xl font-bold text-gray-800 mb-4">
               Pending Requests
@@ -219,11 +209,12 @@ function SellerDash() {
             )}
           </div>
 
+          {/* Task Board Header + Add Task Button */}
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold text-gray-800">Task Board</h2>
             <button
               onClick={() => setIsAddingTask(!isAddingTask)}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg flex items-center"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg"
             >
               {isAddingTask ? "Cancel" : "+ Add Task"}
             </button>
@@ -289,7 +280,7 @@ function SellerDash() {
                         ? "bg-yellow-400"
                         : "bg-green-400"
                     }`}
-                  ></span>
+                  />
                   {status}
                   <span className="ml-2 bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full">
                     {tasks.filter((task) => task.status === status).length}
@@ -313,22 +304,20 @@ function SellerDash() {
                             {task.priority}
                           </span>
                         </div>
-
-                        {task.dueDate && (
-                          <div className="text-xs text-gray-500 mb-3">
-                            Due: {new Date(task.dueDate).toLocaleDateString()}
-                          </div>
-                        )}
-
+                        <div className="text-sm text-gray-500">
+                          Due: {new Date(task.dueDate).toLocaleDateString()}
+                        </div>
                         <select
                           value={task.status}
                           onChange={(e) =>
                             handleStatusChange(task.id, e.target.value)
                           }
-                          className="mt-2 p-1 text-sm rounded-md bg-gray-50 border border-gray-200 w-full"
+                          className="mt-2 w-full text-sm p-2 border rounded-lg"
                         >
-                          {statuses.map((s) => (
-                            <option key={s}>{s}</option>
+                          {statuses.map((statusOption) => (
+                            <option key={statusOption} value={statusOption}>
+                              {statusOption}
+                            </option>
                           ))}
                         </select>
                       </div>
@@ -338,7 +327,7 @@ function SellerDash() {
             ))}
           </div>
 
-          {/* Gantt Chart Placeholder with improved styling */}
+          {/* Timeline Overview (Gantt Chart Placeholder) */}
           <div className="mb-8">
             <h2 className="text-xl font-bold text-gray-800 mb-4">
               Timeline Overview
@@ -366,7 +355,6 @@ function SellerDash() {
                   })}
                 </div>
               </div>
-
               {tasks.map((task) => (
                 <div
                   key={task.id}
@@ -375,7 +363,8 @@ function SellerDash() {
                   <div className="w-1/6 pr-4 truncate">{task.title}</div>
                   <div className="w-5/6 flex">
                     {Array.from({ length: 7 }).map((_, i) => {
-                      const isActive = Math.random() > 0.7; // Just for demo
+                      // For demo purposes, we use a random value
+                      const isActive = Math.random() > 0.7;
                       return (
                         <div key={i} className="flex-1 px-1">
                           {isActive && (
@@ -398,7 +387,7 @@ function SellerDash() {
             </div>
           </div>
 
-          {/* Time Tracking Section */}
+          {/* Time & Billing */}
           <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
             <h2 className="text-xl font-bold text-gray-800 mb-4">
               Time & Billing
@@ -455,7 +444,9 @@ function SellerDash() {
                   <div className="border-t border-gray-200 pt-2 mt-2">
                     <div className="flex justify-between">
                       <span className="font-medium">Total:</span>
-                      <span className="font-bold">${totalBill.toFixed(2)}</span>
+                      <span className="font-bold">
+                        ${totalBill.toFixed(2)}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -464,6 +455,17 @@ function SellerDash() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function StatCard({ title, value, color }) {
+  return (
+    <div
+      className={`bg-gradient-to-br from-${color}-50 to-${color}-100 p-4 rounded-lg shadow-sm`}
+    >
+      <h3 className={`text-sm font-medium text-${color}-600 mb-1`}>{title}</h3>
+      <p className="text-2xl font-bold">{value}</p>
     </div>
   );
 }

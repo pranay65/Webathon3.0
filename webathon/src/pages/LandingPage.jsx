@@ -224,14 +224,16 @@ function LandingPage() {
                     <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
                   </motion.button>
                 </Link>
-                <motion.button
-                  className="flex items-center justify-center gap-2 border-2 border-white bg-transparent px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-[#5C6BC0] transition group"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Start Freelancing
-                  <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-                </motion.button>
+                <Link to="/postjob">
+                  <motion.button
+                    className="flex items-center justify-center gap-2 border-2 border-white bg-transparent px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-[#5C6BC0] transition group"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Start Freelancing
+                    <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+                  </motion.button>
+                </Link>
               </motion.div>
             </motion.div>
           </div>
