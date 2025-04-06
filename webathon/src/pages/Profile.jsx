@@ -211,6 +211,10 @@ const FreelancerProfile = () => {
     nav("/seller");
   };
 
+  const navigateToBuyerDashboard = () => {
+    nav("/buyer");
+  };
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -229,14 +233,25 @@ const FreelancerProfile = () => {
               {isEditing ? "Edit Profile" : "Freelancer Profile"}
             </h1>
             <div className="flex space-x-2">
-              {userData.userType === "seller" && !isEditing && (
-                <button
-                  onClick={navigateToSellerDashboard}
-                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition"
-                >
-                  Seller Dashboard
-                </button>
-              )}
+              {!isEditing &&
+                (userData.userType === "seller" ? (
+                  <button
+                    onClick={navigateToSellerDashboard}
+                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition"
+                  >
+                    Seller Dashboard
+                  </button>
+                ) : (
+                  userData.userType === "buyer" && (
+                    <button
+                      onClick={navigateToBuyerDashboard}
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
+                    >
+                      Buyer Dashboard
+                    </button>
+                  )
+                ))}
+
               {!isEditing ? (
                 <button
                   onClick={() => setIsEditing(true)}

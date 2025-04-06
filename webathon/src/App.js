@@ -29,6 +29,8 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/payment" element={<Payment jname="Web Development" />} />
+        <Route path="/time " element={<TimeLine />} />
+        <Route path="/createproject" element={<CreateProject />} />
       </Routes>
     </Router>
   );
