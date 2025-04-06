@@ -48,6 +48,7 @@ projectApp.post(
       budget: parseFloat(budget),
       status: "pending",
       createdAt: new Date(),
+      bname:req.name,
     };
     console.log(project);
 
@@ -56,5 +57,12 @@ projectApp.post(
     return res.status(201).json({ status: 200, message: "Project Added Successfully!" });
   })
 );
+
+projectApp.get("/", verifyToken, expHandler(async (req, res) => {
+  const projectsCollection = req.app.get("projectsCollection");     
+
+  const data = await projectsCollection.find({bname:req.name}).toArray();
+  return res.status(200).json(data);        
+}))
 
 module.exports = projectApp;
