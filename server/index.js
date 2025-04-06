@@ -7,6 +7,7 @@ const modalApp = require("./APIs/modalApp");
 const requestsApp = require("./APIs/requestsApp");
 const razorApp = require("./APIs/RazorPay.js");
 const projectApp = require("./APIs/ProjectApp.js")
+const reviewApp = require("./APIs/reviewApp.js")
 const app = exp();
 
 app.use(exp.json());
@@ -23,10 +24,12 @@ client
     const jobsCollection = database.collection("jobs");
     const requestsCollection = database.collection("requests");
     const projectsCollection = database.collection("projects");
+    const reviewsCollection = database.collection("reviews");
     app.set("projectsCollection", projectsCollection);
     app.set("usersCollection", usersCollection);
     app.set("jobsCollection", jobsCollection);
     app.set("requestsCollection", requestsCollection);
+    app.set("reviewsCollection", reviewsCollection);
     console.log("Database Connected Successfully!");
   })
   .catch((err) => {
@@ -38,7 +41,8 @@ app.use("/jobs", jobsApp);
 app.use("/modal", modalApp);
 app.use("/requests", requestsApp);
 app.use("/razorpay", razorApp);
-app.use("/projects",projectApp)
+app.use("/projects",projectApp);
+app.use("/reviews",reviewApp);
 
 
 app.listen(port, () => {

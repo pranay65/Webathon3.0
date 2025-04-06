@@ -15,6 +15,7 @@ import Payment from "./Components/Payment";
 import Certification from "./pages/Certifications";
 import TimeLine from "./pages/TimeLine";
 import CreateProject from "./pages/CreateProject";
+import ReviewForm from "./pages/ReviewForm";
 
 function App() {
   return (
@@ -35,7 +36,7 @@ function App() {
         <Route path="/certification" element={<Certification />} />
         <Route path="/time" element={<TimeLine />} />
         <Route path="/createproject" element={<CreateProject />} />
-        
+        <Route path="/review" element={<ReviewForm kname="Sai Charan"/>} />
       </Routes>
     </Router>
   );
