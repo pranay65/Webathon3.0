@@ -16,7 +16,7 @@ import Certification from "./pages/Certifications";
 import TimeLine from "./pages/TimeLine";
 import CreateProject from "./pages/CreateProject";
 import ReviewForm from "./pages/ReviewForm";
-import MyProjects  from "./pages/MyProjects";
+import MyProjects from "./pages/MyProjects";
 
 function App() {
   return (
@@ -33,11 +33,11 @@ function App() {
         <Route path="/contract" element={<ContractPage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/search" element={<SearchPage />} />
-        <Route path="/payment" element={<Payment jname="Web Development" />} />
+        <Route path="/payment" element={<Payment jname="Finance Tracker" />} />
         <Route path="/certification" element={<Certification />} />
         <Route path="/time" element={<TimeLine />} />
         <Route path="/createproject" element={<CreateProject />} />
-        <Route path="/review" element={<ReviewForm kname="Sai Charan"/>} />
+        <Route path="/review" element={<ReviewForm kname="Sai Charan" />} />
         <Route path="/myprojects" element={<MyProjects />} />
       </Routes>
     </Router>

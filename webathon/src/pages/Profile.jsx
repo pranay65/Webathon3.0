@@ -217,6 +217,10 @@ const FreelancerProfile = () => {
     nav("/buyer");
   };
 
+  const navigateToPitch = () => {
+    nav("/pitch");
+  };
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -237,12 +241,20 @@ const FreelancerProfile = () => {
             <div className="flex space-x-2">
               {!isEditing &&
                 (userData.userType === "seller" ? (
-                  <button
-                    onClick={navigateToSellerDashboard}
-                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition"
-                  >
-                    Seller Dashboard
-                  </button>
+                  <>
+                    <button
+                      onClick={navigateToSellerDashboard}
+                      className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition"
+                    >
+                      Seller Dashboard
+                    </button>
+                    <button
+                      onClick={navigateToPitch}
+                      className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition"
+                    >
+                      Create a Pitch
+                    </button>
+                  </>
                 ) : (
                   userData.userType === "buyer" && (
                     <button
@@ -418,6 +430,7 @@ const FreelancerProfile = () => {
                       <ExternalLink className="h-4 w-4" />
                       <span>More Info</span>
                     </button>
+
                     <ul className="space-y-2">
                       {userData.certifications.map((cert, index) => (
                         <li key={index} className="flex items-start">

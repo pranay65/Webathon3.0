@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Navbar from "./Navbar";
 
 export function Payment({ jname }) {
   const [job, setJob] = useState(null);
@@ -94,50 +95,55 @@ export function Payment({ jname }) {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded-xl shadow-lg">
-      <h2 className="text-2xl font-bold mb-6 text-center">Pay for Job</h2>
+    <>
+      <Navbar />
+      <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded-xl shadow-lg mt-0 pt-32">
+        <h2 className="text-2xl font-bold mb-6 text-center">Pay for Job</h2>
 
-      <div className="space-y-4">
-        <input
-          type="text"
-          name="name"
-          placeholder="Full Name"
-          value={formData.name}
-          onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-md"
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-md"
-        />
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Phone Number"
-          value={formData.phone}
-          onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-md"
-        />
+        <div className="space-y-4">
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            value={formData.name}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-md"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-md"
+          />
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Phone Number"
+            value={formData.phone}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-md"
+          />
 
-        <div className="mt-6 border-t pt-4">
-          <p className="font-medium">
-            Job Title: <span className="font-semibold">{job.name}</span>
-          </p>
-          <p className="font-bold text-lg mt-2">Amount to Pay: ₹{job.price}</p>
+          <div className="mt-6 border-t pt-4">
+            <p className="font-medium">
+              Job Title: <span className="font-semibold">{job.name}</span>
+            </p>
+            <p className="font-bold text-lg mt-2">
+              Amount to Pay: ₹{job.price}
+            </p>
+          </div>
+
+          <button
+            onClick={proceedPayment}
+            className="w-full bg-green-500 text-white py-3 rounded-md hover:bg-green-600 font-semibold mt-4"
+          >
+            Pay ₹{job.price}
+          </button>
         </div>
-
-        <button
-          onClick={proceedPayment}
-          className="w-full bg-green-500 text-white py-3 rounded-md hover:bg-green-600 font-semibold mt-4"
-        >
-          Pay ₹{job.price}
-        </button>
       </div>
-    </div>
+    </>
   );
 }
 

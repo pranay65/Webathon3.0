@@ -30,7 +30,7 @@ function JobPosting() {
       },
     });
 
-    nav("/joblisting");
+    nav("/search");
 
     console.log("Submitted Job:", formData);
   };
