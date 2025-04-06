@@ -92,12 +92,12 @@ const BuyerDash = () => {
                   <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-xl mb-4">
                     📄
                   </div>
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">View Proposals</h3>
-                  <p className="text-gray-600">Review and compare proposals submitted by freelancers for your projects.</p>
+                  <h3 className="text-lg font-bold text-gray-800 mb-2">View Projects</h3>
+                  <p className="text-gray-600">Select a project from your dashboard to view details and proposals.</p>
                 </div>
                 <div className="border-t border-gray-100 p-4">
                   <button 
-                    onClick={() => navigate("/proposals")}
+                    onClick={() => navigate("/myprojects")}
                     className="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-colors"
                   >
                     View Proposals

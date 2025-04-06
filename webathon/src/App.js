@@ -16,6 +16,7 @@ import Certification from "./pages/Certifications";
 import TimeLine from "./pages/TimeLine";
 import CreateProject from "./pages/CreateProject";
 import ReviewForm from "./pages/ReviewForm";
+import MyProjects  from "./pages/MyProjects";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="/time" element={<TimeLine />} />
         <Route path="/createproject" element={<CreateProject />} />
         <Route path="/review" element={<ReviewForm kname="Sai Charan"/>} />
+        <Route path="/myprojects" element={<MyProjects />} />
       </Routes>
     </Router>
   );
