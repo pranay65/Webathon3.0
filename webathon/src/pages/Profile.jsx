@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { ExternalLink } from "lucide-react";
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Components/Navbar";
@@ -409,6 +411,13 @@ const FreelancerProfile = () => {
                     <h2 className="text-2xl font-bold text-indigo-700 mb-4">
                       Certifications
                     </h2>
+                    <button
+                      onClick={() => nav("/certification")}
+                      className="ml-4 flex items-center space-x-1 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 border border-indigo-200 hover:border-indigo-300 rounded-lg px-3 py-1.5 transition-colors text-sm font-medium"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                      <span>More Info</span>
+                    </button>
                     <ul className="space-y-2">
                       {userData.certifications.map((cert, index) => (
                         <li key={index} className="flex items-start">
@@ -669,9 +678,12 @@ const FreelancerProfile = () => {
               </section>
 
               <section className="bg-gray-50 p-6 rounded-xl">
-                <h2 className="text-2xl font-bold text-indigo-700 mb-4">
-                  Certifications
-                </h2>
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-2xl font-bold text-indigo-700">
+                    Certifications
+                  </h2>
+                </div>
+
                 <div className="space-y-2 mb-4">
                   {formData.certifications.map((cert, index) => (
                     <div
@@ -715,6 +727,7 @@ const FreelancerProfile = () => {
                     </div>
                   ))}
                 </div>
+
                 <div className="flex">
                   <input
                     type="text"
