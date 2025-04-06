@@ -41,10 +41,9 @@ export default function RegisterPage() {
         certifications: formData.certifications.filter((c) => c.trim() !== ""),
       }),
     };
-    const res = await axios.post(
-      "http://localhost:5400/user/register",
-      dataToSend
-    );
+    const serverURL = process.env.REACT_APP_SERVER_URL;
+
+    const res = await axios.post(`${serverURL}/user/register`, dataToSend);
     if (res.data.status === 400) {
       alert("User already exists!");
     } else {

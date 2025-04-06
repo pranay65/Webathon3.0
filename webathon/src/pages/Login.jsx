@@ -20,7 +20,9 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await axios.post("http://localhost:5400/user/login", formData);
+    const serverURL = process.env.REACT_APP_SERVER_URL;
+
+    const res = await axios.post(`${serverURL}/user/login`, formData);
     if (res.data.status === 400) {
       alert(res.data.message);
     } else if (res.data.status === 200) {

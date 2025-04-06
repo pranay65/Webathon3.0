@@ -6,10 +6,12 @@ function JobListing() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [jobs, setJobs] = useState([]);
 
+  const serverURL = process.env.REACT_APP_SERVER_URL;
+
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.get("http://localhost:5400/jobs/");
+        const res = await axios.get(`${serverURL}/jobs/`);
         const flatJobs = res.data.payload.map((item) => ({
           _id: item._id,
           ...item.job,

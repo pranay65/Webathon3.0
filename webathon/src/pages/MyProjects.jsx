@@ -8,9 +8,11 @@ const ProjectsPage = () => {
   const [loading, setLoading] = useState(true);
   const nav = useNavigate();
 
+  const serverURL = process.env.REACT_APP_SERVER_URL;
+
   const fetchProjects = async () => {
     try {
-      const response = await axios.get("http://localhost:5400/projects", {
+      const response = await axios.get(`${serverURL}/projects`, {
         headers: {
           Authorization: `Bearer ${window.localStorage.getItem("token")}`,
         },

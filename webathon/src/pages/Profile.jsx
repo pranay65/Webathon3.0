@@ -62,10 +62,12 @@ const FreelancerProfile = () => {
     duration: "",
   });
 
+  const serverURL = process.env.REACT_APP_SERVER_URL;
+
   useEffect(() => {
     const fetchSkillsAndCertifications = async () => {
       try {
-        const res = await axios.get("http://localhost:5400/user/type", {
+        const res = await axios.get(`${serverURL}/user/type`, {
           headers: {
             Authorization: `Bearer ${window.localStorage.getItem("token")}`,
           },

@@ -11,6 +11,8 @@ const CreateProject = () => {
     budget: "",
   });
 
+  const serverURL = process.env.REACT_APP_SERVER_URL;
+
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -21,15 +23,11 @@ const CreateProject = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:5400/projects/create",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const res = await axios.post(`${serverURL}/projects/create`, formData, {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+        },
+      });
       if (res.status === 201) {
         alert("Project created successfully!");
         setFormData({

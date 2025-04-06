@@ -11,10 +11,12 @@ export function Payment({ jname }) {
     phone: "",
   });
 
+  const serverURL = process.env.REACT_APP_SERVER_URL;
+
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.post("http://localhost:5400/jobs/pay", {
+        const res = await axios.post(`${serverURL}/jobs/pay`, {
           jname,
         });
         const job = res.data.payload;
@@ -47,12 +49,9 @@ export function Payment({ jname }) {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:5400/razorpay/create-order",
-        {
-          amount: job.price,
-        }
-      );
+      const response = await axios.post(`${serverURL}/razorpay/create-order`, {
+        amount: job.price,
+      });
 
       const options = {
         key: "rzp_test_ZYP4VtDJ8ML7aq",

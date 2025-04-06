@@ -46,12 +46,13 @@ function SellerDash() {
       )
     );
   };
+  const serverURL = process.env.REACT_APP_SERVER_URL;
 
   // Removed dependency on requests so that data is fetched only once on mount.
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.get("http://localhost:5400/requests/", {
+        const res = await axios.get(`${serverURL}/requests/`, {
           headers: {
             Authorization: `Bearer ${window.localStorage.getItem("token")}`,
           },
@@ -69,7 +70,7 @@ function SellerDash() {
 
   const handleAcceptRequest = async (reqName) => {
     try {
-      const res = await axios.put("http://localhost:5400/requests/accept", {
+      const res = await axios.put(`${serverURL}/requests/accept`, {
         reqName,
       });
 

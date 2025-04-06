@@ -27,10 +27,11 @@ const PitchBuilder = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    const serverURL = process.env.REACT_APP_SERVER_URL;
 
     try {
       const response = await axios.post(
-        "http://localhost:5400/modal/generate-pitch",
+        `${serverURL}/modal/generate-pitch`,
         pitch
       );
 

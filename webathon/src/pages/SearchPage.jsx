@@ -70,11 +70,13 @@ Only return an array of matching job objects.
   };
 
   const handleRequestSent = async (name, seller) => {
+    const serverURL = process.env.REACT_APP_SERVER_URL;
+
     const data = {
       name,
       seller,
     };
-    await axios.post("http://localhost:5400/requests/add", data, {
+    await axios.post(`${serverURL}/requests/add`, data, {
       headers: {
         Authorization: `Bearer ${window.localStorage.getItem("token")}`,
       },

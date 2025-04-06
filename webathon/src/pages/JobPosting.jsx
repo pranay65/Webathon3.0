@@ -13,6 +13,7 @@ function JobPosting() {
     image: "",
     description: "",
   });
+  const serverURL = process.env.REACT_APP_SERVER_URL;
 
   const nav = useNavigate();
 
@@ -24,7 +25,7 @@ function JobPosting() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios.post("http://localhost:5400/jobs/add", formData, {
+    await axios.post(`${serverURL}/jobs/add`, formData, {
       headers: {
         Authorization: `Bearer ${window.localStorage.getItem("token")}`,
       },

@@ -9,13 +9,14 @@ const ReviewForm = ({ kname }) => {
   const [reviewText, setReviewText] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const name = kname;
+  const serverURL = process.env.REACT_APP_SERVER_URL;
 
   const handleSubmit = async () => {
     try {
       const token = localStorage.getItem("token");
 
       const response = await axios.post(
-        "http://localhost:5400/reviews/review",
+        `${serverURL}/reviews/review`,
         {
           name,
           rating,
