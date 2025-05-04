@@ -51,14 +51,14 @@ Freelancers can create comprehensive profiles showcasing:
 
 ## 🛠️ Tech Stack (Suggested)
 
-- **Frontend**: React / Next.js  
-- **Backend**: Node.js / Django / Express  
-- **Database**: PostgreSQL / MongoDB  
+- **Frontend**: React 
+- **Backend**: Node.js /  Express  
+- **Database**:  MongoDB  
 - **AI Matching Engine**: Python with NLP  
-- **Authentication**: Firebase / Auth0  
-- **Payments**: Stripe / PayPal API  
-- **Real-Time Communication**: WebRTC / Socket.io  
-- **Deployment**: Vercel / AWS / Docker  
+- **Authentication**: JWT 
+- **Payments**: Razor Pay 
+- **Real-Time Communication**: Socket.io  
+- **Deployment**: Vercel   
 
 ---
 
