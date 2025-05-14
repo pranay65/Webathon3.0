@@ -62,14 +62,7 @@ Freelancers can create comprehensive profiles showcasing:
 
 ---
 
-## 📸 Demo Screenshots
 
-<!-- Replace these paths with actual image links when available -->
-![Home Page](assets/screenshots/home.png)
-![Freelancer Profile](assets/screenshots/profile.png)
-![Job Matching](assets/screenshots/matching.png)
-
----
 
 ## 🧠 Future Enhancements
 
@@ -80,20 +73,7 @@ Freelancers can create comprehensive profiles showcasing:
 
 ---
 
-## 🤝 Ideal For
 
-- Developers building a real-world freelance platform  
-- Entrepreneurs launching a freelance business ecosystem  
-- Final-year project teams aiming for innovation in gig economy tech  
 
----
 
-## 📄 License
 
-This project is licensed under the MIT License.
-
----
-
-## 🌐 Live Demo
-
-[🔗 Link to Deployed Website (if available)](https://your-demo-link.com)
