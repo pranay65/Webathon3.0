@@ -2,7 +2,6 @@
 
 A modern, AI-powered freelance job platform designed to bridge the gap between skilled professionals and clients looking for top-tier talent. This platform streamlines the process of connecting, collaborating, and contracting, empowering freelancers and businesses alike.
 
----
 
 ## 🧩 Problem Overview
 
@@ -10,7 +9,7 @@ Freelancers often struggle to find reliable job opportunities due to fragmented 
 
 This platform addresses these issues by offering a **streamlined, secure, and smart solution** that enhances accessibility, builds trust, and ensures fair compensation.
 
----
+
 
 ## 🚀 Key Features
 
@@ -47,9 +46,8 @@ Freelancers can create comprehensive profiles showcasing:
 - Interactive **Kanban boards** and **Gantt charts** for tracking project progress  
 - Built-in time tracking and automated invoices for hourly work
 
----
 
-## 🛠️ Tech Stack (Suggested)
+## 🛠️ Tech Stack 
 
 - **Frontend**: React 
 - **Backend**: Node.js /  Express  
@@ -60,7 +58,6 @@ Freelancers can create comprehensive profiles showcasing:
 - **Real-Time Communication**: Socket.io  
 - **Deployment**: Vercel   
 
----
 
 
 
@@ -71,7 +68,7 @@ Freelancers can create comprehensive profiles showcasing:
 - Freelance team creation and agency support  
 - AI-generated resume/profile suggestions  
 
----
+
 
 
 
